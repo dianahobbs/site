@@ -1,0 +1,105 @@
+let dots = [];
+let highlightColor;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(0);
+
+  // Populate with moving dots
+  for (let i = 0; i < 50; i++) {
+    dots.push(new MovingDot(random(width), random(height)));
+  }
+
+  // Subtle metallic silver color for accents
+  highlightColor = color(192, 192, 192);  // Light metallic silver
+}
+
+function draw() {
+  background(0, 20); // Semi-transparent for fading trails
+
+  // Update and display each dot
+  for (let dot of dots) {
+    dot.update(mouseX, mouseY);
+    dot.display(mouseX, mouseY);  // Pass mouse position to check hover
+  }
+
+  // Draw lines between dots only if they're within a certain distance
+  for (let i = 0; i < dots.length; i++) {
+    for (let j = i + 1; j < dots.length; j++) {
+      let d = dist(dots[i].x, dots[i].y, dots[j].x, dots[j].y);
+
+      // Only connect dots that are within a specified range (150px)
+      if (d < 150) {
+        let nearMouse = dist(mouseX, mouseY, (dots[i].x + dots[j].x) / 2, (dots[i].y + dots[j].y) / 2) < 100;
+
+        // If cursor is near, use the white highlight
+        let lineColor = nearMouse ? color(255) : highlightColor; // White when cursor isn't near, silver when it is
+        stroke(lineColor);
+        strokeWeight(map(d, 0, 150, 1.5, 0.5)); // Variable line thickness based on distance
+        line(dots[i].x, dots[i].y, dots[j].x, dots[j].y);
+      }
+    }
+  }
+}
+
+// Add new dots when the mouse is pressed
+function mousePressed() {
+  let newDot = new MovingDot(mouseX, mouseY);
+  dots.push(newDot);
+}
+
+class MovingDot {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.size = random(8, 20); // More variation in dot sizes
+    this.speed = p5.Vector.random2D().mult(random(0.05, 0.2));  // Slower speed
+    this.depthOffset = random(2, 4);  // Stronger depth offset for more depth feel
+    this.zOffset = random(0, 1);  // Z-axis depth variation (for visual 3D effect)
+    this.easeFactor = random(0.1, 0.5); // Smooth easing factor for movement
+  }
+
+  update(mx, my) {
+    let d = dist(mx, my, this.x, this.y);
+
+    // Repel from cursor if nearby
+    if (d < 100) {
+      let repelForce = createVector(this.x - mx, this.y - my);
+      repelForce.setMag(0.5); // Stronger repel for clear effect
+      this.x += repelForce.x;
+      this.y += repelForce.y;
+    }
+
+    // Update position with random depth fluctuation and easing
+    let targetX = this.x + this.speed.x * this.depthOffset;
+    let targetY = this.y + this.speed.y * this.depthOffset;
+    this.x += (targetX - this.x) * this.easeFactor;
+    this.y += (targetY - this.y) * this.easeFactor;
+
+    // Random movement in the z-axis for a 3D effect
+    this.zOffset += random(-0.01, 0.01);
+    this.zOffset = constrain(this.zOffset, 0, 1);  // Limit the depth fluctuation
+
+    // Bounce off edges
+    if (this.x < 0 || this.x > width) this.speed.x *= -1;
+    if (this.y < 0 || this.y > height) this.speed.y *= -1;
+  }
+
+  display(mx, my) {
+    let d = dist(mx, my, this.x, this.y);
+
+    // Apply glow effect for hover
+    if (d < this.size / 2) {
+      fill(255); // White color when hovered
+      stroke(255); // Add a glow effect by stroking the dots
+      strokeWeight(1);
+      ellipse(this.x, this.y, this.size + 5); // Slightly larger for the glow effect
+      noStroke();
+    } else {
+      fill(highlightColor); // Metallic silver color by default
+    }
+
+    noStroke();
+    ellipse(this.x, this.y, this.size); // Use the variable size for dots
+  }
+}
