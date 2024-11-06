@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p5.js Sketch</title>
+  <title>Interactive Dots</title>
+  <!-- Include the p5.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
   <script>
-    // Your p5.js code goes here
     let dots = [];
     let highlightColor;
 
@@ -22,7 +22,7 @@
       }
 
       // Subtle metallic silver color for accents
-      highlightColor = color(192, 192, 192);  // Light metallic silver
+      highlightColor = color(192, 192, 192); // Light metallic silver
     }
 
     function draw() {
@@ -64,9 +64,9 @@
         this.x = x;
         this.y = y;
         this.size = random(8, 20); // More variation in dot sizes
-        this.speed = p5.Vector.random2D().mult(random(0.05, 0.2));  // Slower speed
-        this.depthOffset = random(2, 4);  // Stronger depth offset for more depth feel
-        this.zOffset = random(0, 1);  // Z-axis depth variation (for visual 3D effect)
+        this.speed = p5.Vector.random2D().mult(random(0.05, 0.2)); // Slower speed
+        this.depthOffset = random(2, 4); // Stronger depth offset for more depth feel
+        this.zOffset = random(0, 1); // Z-axis depth variation (for visual 3D effect)
         this.easeFactor = random(0.1, 0.5); // Smooth easing factor for movement
       }
 
@@ -89,7 +89,7 @@
 
         // Random movement in the z-axis for a 3D effect
         this.zOffset += random(-0.01, 0.01);
-        this.zOffset = constrain(this.zOffset, 0, 1);  // Limit the depth fluctuation
+        this.zOffset = constrain(this.zOffset, 0, 1); // Limit the depth fluctuation
 
         // Bounce off edges
         if (this.x < 0 || this.x > width) this.speed.x *= -1;
