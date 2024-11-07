@@ -43,23 +43,23 @@
 
       // Set up text appearance
       textAlign(CENTER, CENTER);
-      fill(255); // White color for the text
     }
 
     function draw() {
       background(0, 20); // Semi-transparent for fading trails
 
-      // Display the title text at the top center
+      // Display the title text at the top center, in white for contrast
+      fill(255); // White color for the text
       textSize(titleFontSize); // Title font size
       textStyle(BOLD);
       text("Diana Hobbs", width / 2, height / 3);
 
-      // Display the subtitle text below the title
+      // Display the subtitle text below the title, in white
       textSize(subtitleFontSize); // Subtitle font size
       textStyle(NORMAL);
-      text("Analytical Programmer | Data Visualizer", width / 2, height / 2);
+      text("Analytics Programmer | Data Visualizer", width / 2, height / 2);
 
-      // Update and display each dot
+      // Draw the dots and lines after the text, to ensure text stays on top
       for (let dot of dots) {
         dot.update(mouseX, mouseY);
         dot.display(mouseX, mouseY);  // Pass mouse position to check hover
