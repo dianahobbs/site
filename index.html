@@ -4,12 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Dots</title>
+  <!-- Include the p5.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
+  <!-- Load Google Fonts (Roboto, both normal and bold) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Roboto', sans-serif;
+    }
+  </style>
 </head>
 <body>
   <script>
     let dots = [];
     let highlightColor;
+    let titleFontSize;
+    let subtitleFontSize;
 
     function setup() {
       createCanvas(windowWidth, windowHeight);
@@ -23,8 +37,11 @@
       // Subtle metallic silver color for accents
       highlightColor = color(192, 192, 192); // Light metallic silver
 
+      // Set text sizes based on window width
+      titleFontSize = windowWidth * 0.08; // Title size relative to window width
+      subtitleFontSize = windowWidth * 0.04; // Subtitle size relative to window width
+
       // Set up text appearance
-      textSize(32);
       textAlign(CENTER, CENTER);
       fill(255); // White color for the text
     }
@@ -33,7 +50,14 @@
       background(0, 20); // Semi-transparent for fading trails
 
       // Display the title text at the top center
-      text("Interactive Dots Simulation", width / 2, 50);
+      textSize(titleFontSize); // Title font size
+      textStyle(BOLD);
+      text("Diana Hobbs", width / 2, height / 3);
+
+      // Display the subtitle text below the title
+      textSize(subtitleFontSize); // Subtitle font size
+      textStyle(NORMAL);
+      text("Analytical Programmer | Data Visualizer", width / 2, height / 2);
 
       // Update and display each dot
       for (let dot of dots) {
