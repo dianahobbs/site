@@ -56,7 +56,7 @@
       drawTextWithGradient("Diana Hobbs", width / 2, height / 3, titleFontSize);
 
       // Create gradient for the subtitle
-      drawTextWithGradient("Analytics Programmer | Data Visualizer", width / 2, height / 2, subtitleFontSize);
+      drawTextWithGradient("Analytical Programmer | Data Visualizer", width / 2, height / 2, subtitleFontSize);
 
       // Draw the dots and lines after the text, to ensure text stays on top
       for (let dot of dots) {
@@ -85,9 +85,12 @@
 
     // Function to draw text with gradient
     function drawTextWithGradient(text, x, y, size) {
+      // Create a gradient from seafoam green to purple
       let grad = drawingContext.createLinearGradient(0, 0, width, height);
       grad.addColorStop(0, gradientStart);
       grad.addColorStop(1, gradientEnd);
+
+      // Apply the gradient as the text fill style
       drawingContext.fillStyle = grad;
 
       fill(grad);
