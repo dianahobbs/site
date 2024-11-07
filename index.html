@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Dots</title>
-  <!-- Include the p5.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
@@ -23,10 +22,18 @@
 
       // Subtle metallic silver color for accents
       highlightColor = color(192, 192, 192); // Light metallic silver
+
+      // Set up text appearance
+      textSize(32);
+      textAlign(CENTER, CENTER);
+      fill(255); // White color for the text
     }
 
     function draw() {
       background(0, 20); // Semi-transparent for fading trails
+
+      // Display the title text at the top center
+      text("Interactive Dots Simulation", width / 2, 50);
 
       // Update and display each dot
       for (let dot of dots) {
