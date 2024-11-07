@@ -25,6 +25,10 @@
     let titleFontSize;
     let subtitleFontSize;
 
+    // Color stops for the gradient (seafoam green to purple)
+    const gradientStart = color(0, 255, 185); // Seafoam green
+    const gradientEnd = color(128, 0, 128);   // Purple
+
     function setup() {
       createCanvas(windowWidth, windowHeight);
       background(0);
@@ -48,16 +52,11 @@
     function draw() {
       background(0, 20); // Semi-transparent for fading trails
 
-      // Display the title text at the top center, in white for contrast
-      fill(255); // White color for the text
-      textSize(titleFontSize); // Title font size
-      textStyle(BOLD);
-      text("Diana Hobbs", width / 2, height / 3);
+      // Create gradient for the title
+      drawTextWithGradient("Diana Hobbs", width / 2, height / 3, titleFontSize);
 
-      // Display the subtitle text below the title, in white
-      textSize(subtitleFontSize); // Subtitle font size
-      textStyle(NORMAL);
-      text("Analytics Programmer | Data Visualizer", width / 2, height / 2);
+      // Create gradient for the subtitle
+      drawTextWithGradient("Analytics Programmer | Data Visualizer", width / 2, height / 2, subtitleFontSize);
 
       // Draw the dots and lines after the text, to ensure text stays on top
       for (let dot of dots) {
@@ -82,6 +81,19 @@
           }
         }
       }
+    }
+
+    // Function to draw text with gradient
+    function drawTextWithGradient(text, x, y, size) {
+      let grad = drawingContext.createLinearGradient(0, 0, width, height);
+      grad.addColorStop(0, gradientStart);
+      grad.addColorStop(1, gradientEnd);
+      drawingContext.fillStyle = grad;
+
+      fill(grad);
+      textSize(size);
+      textStyle(BOLD);
+      text(text, x, y);
     }
 
     // Add new dots when the mouse is pressed
