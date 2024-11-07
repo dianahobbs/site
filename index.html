@@ -16,14 +16,32 @@
       overflow: hidden;
       font-family: 'Roboto', sans-serif;
     }
+
+    /* Styling for bold title */
+    .title {
+      font-weight: 700; /* Bold */
+      font-size: 5vw; /* Makes the title size responsive */
+      text-align: center;
+      color: #2C3E50; /* Dark Slate Blue for a professional feel */
+    }
+
+    /* Styling for subtitle */
+    .subtitle {
+      font-weight: 400; /* Normal weight */
+      font-size: 3vw; /* Makes the subtitle size responsive */
+      text-align: center;
+      color: #7F8C8D; /* Charcoal Gray for a clean, professional look */
+    }
   </style>
 </head>
 <body>
+  <!-- Adding the title and subtitle directly as HTML elements -->
+  <div class="title">Diana Hobbs</div>
+  <div class="subtitle">Analyst | Programmer | Data Visualizer</div>
+
   <script>
     let dots = [];
     let highlightColor;
-    let titleFontSize;
-    let subtitleFontSize;
 
     function setup() {
       createCanvas(windowWidth, windowHeight);
@@ -37,27 +55,12 @@
       // Subtle metallic silver color for accents
       highlightColor = color(192, 192, 192); // Light metallic silver
 
-      // Set text sizes based on window width
-      titleFontSize = windowWidth * 0.08; // Title size relative to window width
-      subtitleFontSize = windowWidth * 0.04; // Subtitle size relative to window width
-
       // Set up text appearance
       textAlign(CENTER, CENTER);
     }
 
     function draw() {
       background(0, 20); // Semi-transparent for fading trails
-
-      // Display the title text at the top center, in white for contrast
-      fill(255); // White color for the text
-      textSize(titleFontSize); // Title font size
-      textStyle(BOLD);
-      text("Diana Hobbs", width / 2, height / 3);
-
-      // Display the subtitle text below the title, in white
-      textSize(subtitleFontSize); // Subtitle font size
-      textStyle(NORMAL);
-      text("Analytic Programmer | Data Visualizer", width / 2, height / 2);
 
       // Draw the dots and lines after the text, to ensure text stays on top
       for (let dot of dots) {
