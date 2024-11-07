@@ -48,16 +48,16 @@
     function draw() {
       background(0, 20); // Semi-transparent for fading trails
 
-      // Display the title text at the top center, in Bright Silver for contrast
-      fill('#AAB7B8'); // Bright Silver color for the text
+      // Display the title text at the top center, in white for contrast
+      fill(255); // White color for the text
       textSize(titleFontSize); // Title font size
       textStyle(BOLD);
       text("Diana Hobbs", width / 2, height / 3);
 
-      // Display the subtitle text below the title, in Bright Silver
+      // Display the subtitle text below the title, in white
       textSize(subtitleFontSize); // Subtitle font size
       textStyle(NORMAL);
-      text("Analytical Programmer | Data Visualizer", width / 2, height / 2);
+      text("Analyst |  Programmer | Data Visualizer", width / 2, height / 2);
 
       // Draw the dots and lines after the text, to ensure text stays on top
       for (let dot of dots) {
